@@ -41,3 +41,22 @@ class Tourist:
             return f"Not enough money to visit {place.name}."
 
 
+class AdvantureApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Adventures")
+
+        self.places = [
+            Beach("Maldives", 20 ,5, "🏝️"),
+            Mountain("Himalayas", 30,10, "⛰️"),
+            City("Milan",15,7.5, "🌃" ),
+            Beach("Bali", 10, 5, "🍹"),
+            Mountain("Everest", 50, 25, "🗻"),
+            City("Paris", 20, 10, "🗼"),
+            Beach("Punta Cana", 40,  20, "🌊"),
+            Mountain("Alps", 35, 17.5, "🏞️"),
+            City("Tokyo", 60, 30, "⛩️"),
+        ]
+
+        self.avatar_options = ["🧔🏻","👩","👥️","👨🏻‍💻","🤑"]
+        self.create_start_screen()
