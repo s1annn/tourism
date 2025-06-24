@@ -78,7 +78,7 @@ class AdvantureApp:
         self.start_frame.destroy()
         self.create_game_widgets()
 
-    def create_game_widgets(self):
+def create_game_widgets(self):
         self.status_label = tk.Label(self.root, text=self.get_status(), font=("Arial", 12))
         self.status_label.pack(pady=10)
 
@@ -88,9 +88,21 @@ class AdvantureApp:
         for place in self.places:
             btn = tk.Button(self.buttons_frame, text=place.describe(), width=60, command=lambda p=place: self.visit_place(p))
             btn.pack(pady=2)
-            
+
         self.output_text = tk.Text(self.root, height=10, width=70, state="disabled", wrap="word")
         self.output_text.pack(pady=10)
 
         self.exit_button = tk.Button(self.root, text="Exit", command=self.root.destroy)
         self.exit_button.pack(pady=5)
+
+
+def visit_place(self, place):
+    result = self.player.visit(place)
+    self.update_output(result)
+    self.status_label.config(text=self.get_status())
+
+    if self.player.money < min(p.cost for p in self.places):
+        messagebox.showinfo("Game over",
+                            f"You don't have enough money to continue visiting more places!\nFinal EXP: {self.player.experience}")
+        self.root.destroy()
+
