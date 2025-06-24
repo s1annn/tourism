@@ -60,3 +60,16 @@ class AdvantureApp:
 
         self.avatar_options = ["🧔🏻","👩","👥️","👨🏻‍💻","🤑"]
         self.create_start_screen()
+        
+ def create_start_screen(self):
+        self.start_frame = tk.Frame(self.root)
+        self.start_frame.pack()
+
+        tk.Label(self.start_frame, text="Welcome to Advantures! Choose your avatar:", font=("Arial", 14)).pack(pady=10)
+
+        self.avatar_var = tk.StringVar(value=self.avatar_options[0])
+        self.avatar_menu = ttk.Combobox(self.start_frame, textvariable=self.avatar_var, values=self.avatar_options, font=("Arial", 12), state="readonly")
+        self.avatar_menu.pack(pady=5)
+
+        self.start_button = tk.Button(self.start_frame, text="Start Advanture", command=self.start_game, font=("Arial", 12), bg="#4CAF50", fg="white")
+        self.start_button.pack(pady=10)
