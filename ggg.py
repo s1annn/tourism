@@ -41,7 +41,7 @@ class Tourist:
             return f"Not enough money to visit {place.name}."
 
 
-class AdvantureApp:
+class AdventureApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Adventures")
@@ -61,7 +61,7 @@ class AdvantureApp:
         self.avatar_options = ["🧔🏻","👩","👥️","👨🏻‍💻","🤑"]
         self.create_start_screen()
 
- def create_start_screen(self):
+    def create_start_screen(self):
         self.start_frame = tk.Frame(self.root)
         self.start_frame.pack()
 
@@ -73,12 +73,12 @@ class AdvantureApp:
 
         self.start_button = tk.Button(self.start_frame, text="Start Advanture", command=self.start_game, font=("Arial", 12), bg="#4CAF50", fg="white")
         self.start_button.pack(pady=10)
- def start_game(self):
+    def start_game(self):
         self.player = Tourist("Marek", 300, self.avatar_var.get())
         self.start_frame.destroy()
         self.create_game_widgets()
 
-def create_game_widgets(self):
+    def create_game_widgets(self):
         self.status_label = tk.Label(self.root, text=self.get_status(), font=("Arial", 12))
         self.status_label.pack(pady=10)
 
@@ -96,13 +96,27 @@ def create_game_widgets(self):
         self.exit_button.pack(pady=5)
 
 
-def visit_place(self, place):
-    result = self.player.visit(place)
-    self.update_output(result)
-    self.status_label.config(text=self.get_status())
+    def visit_place(self, place):
+        result = self.player.visit(place)
+        self.update_output(result)
+        self.status_label.config(text=self.get_status())
 
-    if self.player.money < min(p.cost for p in self.places):
-        messagebox.showinfo("Game over",
+        if self.player.money < min(p.cost for p in self.places):
+            messagebox.showinfo("Game over",
                             f"You don't have enough money to continue visiting more places!\nFinal EXP: {self.player.experience}")
-        self.root.destroy()
+            self.root.destroy()
+
+    def get_status(self):
+        return f"{self.player.avatar} {self.player.name}'s Status | 💵 Money: {self.player.money} | ⭐ Experience: {self.player.experience}"
+
+    def update_output(self, message):
+        self.output_text.config(state='normal')
+        self.output_text.insert(tk.END, message + "\n\n")
+        self.output_text.config(state='disabled')
+        self.output_text.see(tk.END)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = AdventureApp(root)
+    root.mainloop()
 
