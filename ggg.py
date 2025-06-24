@@ -24,3 +24,20 @@ class City(Place):
     def describe(self):
          return f"{self.emoji} {self.name}' - Culture, shopping and exiting places. Cost: {self.cost}, EXP : {self.experience}"
 
+#Player class
+class Tourist:
+    def __init__(self, name, money, avatar):
+        self.name = name
+        self.money = money
+        self.experience = 0
+        self.avatar = avatar
+
+    def visit(self, place:Place):
+        if self.money >= place.cost:
+            self.money -= place.cost
+            self.experience += place.experience
+            return f"{self.avatar} {self.name} visited {place.name}\nGained ⭐ {place.experience} EXP | 💵 Money left: {self.money}"
+        else:
+            return f"Not enough money to visit {place.name}."
+
+
