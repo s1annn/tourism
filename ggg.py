@@ -60,7 +60,7 @@ class AdvantureApp:
 
         self.avatar_options = ["🧔🏻","👩","👥️","👨🏻‍💻","🤑"]
         self.create_start_screen()
-        
+
  def create_start_screen(self):
         self.start_frame = tk.Frame(self.root)
         self.start_frame.pack()
@@ -73,3 +73,24 @@ class AdvantureApp:
 
         self.start_button = tk.Button(self.start_frame, text="Start Advanture", command=self.start_game, font=("Arial", 12), bg="#4CAF50", fg="white")
         self.start_button.pack(pady=10)
+ def start_game(self):
+        self.player = Tourist("Marek", 300, self.avatar_var.get())
+        self.start_frame.destroy()
+        self.create_game_widgets()
+
+    def create_game_widgets(self):
+        self.status_label = tk.Label(self.root, text=self.get_status(), font=("Arial", 12))
+        self.status_label.pack(pady=10)
+
+        self.buttons_frame = tk.Frame(self.root)
+        self.buttons_frame.pack()
+
+        for place in self.places:
+            btn = tk.Button(self.buttons_frame, text=place.describe(), width=60, command=lambda p=place: self.visit_place(p))
+            btn.pack(pady=2)
+            
+        self.output_text = tk.Text(self.root, height=10, width=70, state="disabled", wrap="word")
+        self.output_text.pack(pady=10)
+
+        self.exit_button = tk.Button(self.root, text="Exit", command=self.root.destroy)
+        self.exit_button.pack(pady=5)
