@@ -1,5 +1,5 @@
 import unittest
-from adventure import Tourist, City, Beach, Mountain  # Імпортуй зі свого файлу
+from adventure import Tourist, City, Beach, Mountain
 
 class TestAdventureGame(unittest.TestCase):
 
